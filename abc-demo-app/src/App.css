@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.navbar .nav-list ul li:hover:after {
+    transform: translateX(-50%) scale(1);
+}
+
+.navbar .nav-list ul li:after {
+    content: '';
+    position: absolute;
+    width: 5rem;
+    height: .2rem;
+    background-color: white;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    bottom: 0;
+    transition: .3s ease transform;
+}
