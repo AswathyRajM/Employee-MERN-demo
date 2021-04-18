@@ -30,7 +30,6 @@ function Popup() {
 	const [codeError, setCodeError] = useState("");
 
 	useEffect(() => {
-		console.log(editdata);
 		if (editdata) {
 			setName(editdata.name);
 			setCode(editdata.code);
@@ -75,7 +74,7 @@ function Popup() {
 			if (code && name && intime && outtime && valid) {
 				openModalfun();
 				if (editdata) {
-					dispatch(setEditdata({}));
+					dispatch(setEditdata(""));
 					dispatch(
 						editEmployee(editdata.id, {
 							code,
@@ -96,7 +95,7 @@ function Popup() {
 						})
 					);
 					alert("Employee details added!");
-					dispatch(setEditdata({}));
+					dispatch(setEditdata(""));
 				}
 			}
 		}
@@ -194,6 +193,7 @@ function Popup() {
 }
 function heading(state) {
 	if (typeof state === "undefined" || state === "") return "add details";
+
 	return "edit data";
 }
 

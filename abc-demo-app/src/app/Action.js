@@ -29,7 +29,6 @@ export const editEmployee = (id, emp) => async (dispatch) => {
 	try {
 		const { data } = await axios.post(`${apiUrl}/${id}`, emp);
 		data._id = id;
-		console.log(data);
 		dispatch({ type: "EDIT_EMPLOYEE", payload: data });
 	} catch (error) {
 		console.log(error.message);

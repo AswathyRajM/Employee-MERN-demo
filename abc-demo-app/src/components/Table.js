@@ -18,16 +18,24 @@ function rawData(data) {
 }
 function Table() {
 	const data = useSelector((state) => state.rootReducer);
-
-	const open = useSelector((state) => state.state);
 	const isOpen = useSelector((state) => state.modalReducer.openModal);
 	const dispatch = useDispatch();
 	const [isActive, setisActive] = useState("");
+	const [locked, setlocked] = useState({});
+
 	useEffect(() => {
 		dispatch(fetchData());
-	}, [dispatch]);
+		if (isOpen === false) setisActive("");
+	}, [dispatch, isOpen]);
 
 	const rowClicked = (emp, e, i) => {
+		if (isActive === i) {
+			dispatch(setEditdata(""));
+			setisActive("");
+			dispatch(openModal(false));
+			return;
+		}
+		if (typeof emp.isLocked === "undefined") emp.isLocked = false;
 		let clickedElement = e.target;
 		if (
 			clickedElement.id === "icon-td" ||
@@ -39,10 +47,10 @@ function Table() {
 		) {
 			setisActive("");
 			dispatch(lockEmployee(emp._id));
+			return;
 		}
 		if (emp.isLocked === false) {
 			setisActive(i);
-
 			dispatch(
 				setEditdata({
 					id: emp._id,
@@ -122,8 +130,6 @@ function Table() {
 					</tbody>
 				</table>
 			</div>
-
-			{open ? <Modal /> : ""}
 		</>
 	);
 }

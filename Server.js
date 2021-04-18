@@ -40,7 +40,7 @@ const EmployeeSchema = new mongoose.Schema({
 		type: String,
 		max: 25,
 	},
-	inime: {
+	inTime: {
 		type: String,
 	},
 	outTime: {
