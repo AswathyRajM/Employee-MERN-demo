@@ -15,9 +15,14 @@ function Popup() {
 	const { editableData: editdata } = useSelector(
 		(state) => state.editDataReducer
 	);
+
 	const openModalfun = () => {
 		dispatch(setEditdata(""));
 		dispatch(openModal(false));
+		setName("");
+		setCode("");
+		setIntime("");
+		setOuttime("");
 	};
 
 	const [name, setName] = useState("");
@@ -43,61 +48,75 @@ function Popup() {
 		settimeError("");
 		setNameError("");
 		setCodeError("");
-		if (intime === "" || outtime === "" || name === "" || code === "") {
+
+		if (intime === "" || outtime === "") {
 			settimeError("Out time and In time can't be empty");
-			setNameError("Name can't be empty");
-			setCodeError("Code can't be empty");
 			valid = false;
 			return;
 		} else {
-			if (intime > outtime) {
-				settimeError("Out time must be less than In time");
-				setIntime("");
-				setOuttime("");
+			if (name === "") {
+				setNameError("Name can't be empty");
 				valid = false;
-			}
-			if (
-				name.length < 3 ||
-				name.length > 25 ||
-				/^[A-Za-z ]+$/.test(name) === false
-			) {
-				setNameError("Invalid name");
-				setName("");
-				valid = false;
-			}
-
-			if (code.length < 3 || code.length > 10) {
-				setCodeError("Invalid code");
-				setCode("");
-				valid = false;
-			}
-			if (code && name && intime && outtime && valid) {
-				openModalfun();
-				if (editdata) {
-					dispatch(setEditdata(""));
-					dispatch(
-						editEmployee(editdata.id, {
-							code,
-							name,
-							inTime: intime,
-							outTime: outtime,
-						})
-					);
-
-					alert("Employee details saved!");
-				} else {
-					dispatch(
-						addEmployee({
-							code,
-							name,
-							inTime: intime,
-							outTime: outtime,
-						})
-					);
-					alert("Employee details added!");
-					dispatch(setEditdata(""));
+				return;
+			} else {
+				if (code === "") {
+					setCodeError("Code can't be empty");
+					valid = false;
+					return;
 				}
 			}
+		}
+		if (intime > outtime) {
+			settimeError("Out time must be less than In time");
+			setIntime("");
+			setOuttime("");
+			valid = false;
+		}
+		if (
+			name.length < 3 ||
+			name.length > 25 ||
+			/^[A-Za-z ]+$/.test(name) === false
+		) {
+			setNameError("Invalid name");
+			setName("");
+			valid = false;
+		}
+
+		if (code.length < 3 || code.length > 10) {
+			setCodeError("Invalid code");
+			setCode("");
+			valid = false;
+		}
+		if (code && name && intime && outtime && valid) {
+			openModalfun();
+			if (editdata) {
+				dispatch(setEditdata(""));
+				dispatch(
+					editEmployee(editdata.id, {
+						code,
+						name,
+						inTime: intime,
+						outTime: outtime,
+					})
+				);
+
+				alert("Employee details saved!");
+			} else {
+				dispatch(
+					addEmployee({
+						code,
+						name,
+						inTime: intime,
+						outTime: outtime,
+					})
+				);
+				alert("Employee details added!");
+				dispatch(setEditdata(""));
+			}
+			setName("");
+			setCode("");
+			setIntime("");
+			setOuttime("");
 		}
 	};
 

@@ -72,15 +72,13 @@
 .search-container input, .search-button {
 	outline: none;
 	border: none;
-	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-	-webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
 }
 
 .button-container {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 1rem;
+	cursor: pointer;
 }
 
 .button-icon {
@@ -91,12 +89,15 @@
 
 .right-buttons-container button {
 	margin-left: 1rem;
-	width: 9rem;
+	width: 9.5rem;
 	height: 2rem;
 	border-radius: 5px;
 	border: transparent;
 	outline: none;
-	cursor: pointer;
+	cursor: pointer !important;
+	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
 }
 
 .right-buttons-container button span {
@@ -106,6 +107,10 @@
 	align-items: center;
 	line-height: 1rem;
 	padding-right: 15px;
+}
+
+.make {
+	font-size: 12px;
 }
 
 .attendence-counts {

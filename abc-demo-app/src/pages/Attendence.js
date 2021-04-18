@@ -15,15 +15,18 @@ import Modal from "../components/Modal";
 
 function Attendence() {
 	const dispatch = useDispatch();
+
 	const setOpenModal = () => {
 		dispatch(openModal(true));
 	};
+
 	const filterByInput = (e) => {
 		let input = e.target.value;
-		console.log(input);
 		dispatch(filterByValue(input));
 	};
+
 	const open = useSelector((state) => state.modalReducer.openModal);
+
 	return (
 		<>
 			<div className="left-container">
@@ -43,13 +46,9 @@ function Attendence() {
 					</IconContext.Provider>
 				</div>
 				<div className="modal-class">
-					{open ? (
-						<Slide right>
-							<Modal />
-						</Slide>
-					) : (
-						""
-					)}
+					<Slide right when={typeof open === "undefined" ? false : open}>
+						<Modal />
+					</Slide>
 				</div>
 				<div className="table">
 					<div className="table-container">
@@ -64,13 +63,19 @@ function Attendence() {
 									className="text-field"
 									placeholder="Search"
 									onChange={(e) => {
-										//call this method on every change in input
 										filterByInput(e);
 									}}
 								></input>
 							</div>
+
 							<div className="right-buttons-container">
 								<IconContext.Provider value={{ className: "button-icon" }}>
+									<button onClick={setOpenModal}>
+										<span className="make">
+											<GrDocumentUpload />
+											<span>Upload</span>
+										</span>
+									</button>
 									<button>
 										<span>
 											<BsFilter />
@@ -84,12 +89,7 @@ function Attendence() {
 											<BsChevronDown />
 										</span>
 									</button>
-									<button onClick={setOpenModal}>
-										<span>
-											<GrDocumentUpload />
-											<span>Upload</span>
-										</span>
-									</button>
+
 									<button>
 										<span>
 											<HiOutlineRefresh />
@@ -99,23 +99,28 @@ function Attendence() {
 								</IconContext.Provider>
 							</div>
 						</div>
+
 						<div className="attendence-counts">
 							<div className="total-counts working">
 								<h1>3</h1>
 								<p>Total Working Employees</p>
 							</div>
+
 							<div className="total-counts absentees">
 								<h1>5</h1>
 								<p>Total Number of Absentees</p>
 							</div>
+
 							<div className="total-counts approved-leaves">
 								<h1>8</h1>
 								<p>Total Approved Leaves</p>
 							</div>
+
 							<div className="total-counts halfday-leaves">
 								<h1>15</h1>
 								<p>Half-day Leave Requests</p>
 							</div>
+
 							<div className="total-counts late-comers">
 								<h1>22</h1>
 								<p>Total Late Comers</p>

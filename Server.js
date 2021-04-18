@@ -18,12 +18,17 @@ const port = process.env.PORT || 5000;
 var mongoDB =
 	"mongodb+srv://admin1:vkPhmqQm.8!3Rnk@cluster0.lugyh.mongodb.net/emp-demo?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoDB, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useCreateIndex: true,
-	useFindAndModify: false,
-});
+mongoose
+	.connect(mongoDB, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+		useFindAndModify: false,
+	})
+	.catch((err) => {
+		console.error(err.stack);
+		process.exit(1);
+	});
 
 /////////////////////////////Schema///////////////////////////////////
 
@@ -95,19 +100,13 @@ app.post("/api/employees", async (req, res) => {
 
 //edit
 app.post("/api/employees/:id", async (req, res) => {
-	let editData = "";
-	if (typeof res.body.isLocked === "undefined")
-		editData = {
-			code: req.body.code,
-			name: req.body.name,
-			inTime: req.body.inTime,
-			outTime: req.body.outTime,
-		};
-	else
-		editData = {
-			isLocked: !req.body.isLocked,
-		};
-	console.log(editData);
+	const editData = {
+		code: req.body.code,
+		name: req.body.name,
+		inTime: req.body.inTime,
+		outTime: req.body.outTime,
+	};
+
 	const edit = await Employee.findOneAndUpdate(
 		{ _id: req.params.id },
 		{
