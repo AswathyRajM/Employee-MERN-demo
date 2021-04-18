@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-	lockEmployee,
-	setEditdata,
-	openModal,
-	editEmployee,
-	fetchData,
-} from "../app/Action";
+import { lockEmployee, setEditdata, openModal, fetchData } from "../app/Action";
 import { AiFillLock, AiOutlineLock } from "react-icons/ai";
-import Modal from "./Modal";
 import "./Table.css";
 
 function rawData(data) {
@@ -21,7 +14,6 @@ function Table() {
 	const isOpen = useSelector((state) => state.modalReducer.openModal);
 	const dispatch = useDispatch();
 	const [isActive, setisActive] = useState("");
-	const [locked, setlocked] = useState({});
 
 	useEffect(() => {
 		dispatch(fetchData());
@@ -101,7 +93,7 @@ function Table() {
 											)}
 										</span>
 									</td>
-									<td>
+									<td className="checkbox">
 										{
 											<label key={emp._id} htmlFor={emp._id}>
 												<input
@@ -117,7 +109,7 @@ function Table() {
 											</label>
 										}
 									</td>
-									<td>{i++}</td>
+									<td className="employee-count">{i++}</td>
 									<td>{emp.code}</td>
 									<td>{emp.name}</td>
 									<td>{emp.inTime}</td>

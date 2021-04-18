@@ -47,3 +47,18 @@ li a {
 	align-items: center;
 	padding: 0 16px;
 }
+
+.active ::before {
+	content: '';
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	background-color: #ffffff;
+	position: absolute;
+	left: 1.4rem;
+	vertical-align: middle;
+	top: 11px;
+}

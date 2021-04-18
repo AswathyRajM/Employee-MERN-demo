@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { BiUser, BiUserCircle } from "react-icons/bi";
+import { IoDocumentsOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
 
 import "./Navbar.css";
 
@@ -10,16 +12,48 @@ function Navbar() {
 			<nav>
 				<ul>
 					<li>
-						<Link className="link" to="/employee">
-							<BiUser />
+						<NavLink
+							exact
+							className="link"
+							to="/employee"
+							activeClassName="active"
+						>
+							<FaRegUser />
 							<span>Employee</span>
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link className="link" to="/events">
+						<NavLink
+							exact
+							className="link"
+							to="/attendence"
+							activeClassName="active"
+						>
+							<BiUser />
+							<span>Attendence</span>
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							exact
+							className="link"
+							to="/events"
+							activeClassName="active"
+						>
 							<BiUserCircle />
 							<span>Events</span>
-						</Link>
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							exact
+							className="link"
+							to="/documents"
+							activeClassName="active"
+						>
+							<IoDocumentsOutline />
+							<span>Documents</span>
+						</NavLink>
 					</li>
 				</ul>
 			</nav>

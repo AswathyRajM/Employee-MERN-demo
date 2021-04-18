@@ -19,13 +19,32 @@ tr {
 	height: 30px;
 }
 
-#icon-td, #icon-span, #icon-lock-fil, #icon-lock {
+#icon-td, #icon-span, #icon-lock-fill, #icon-lock {
 	cursor: pointer;
 	position: relative;
-	background-color: blueviolet;
-	padding: 2px;
-	font-size: 20px;
+	font-size: 18px;
 	text-align: center;
+	width: 25px;
+	padding-right: 5px;
+}
+
+input[type=checkbox] {
+	cursor: pointer;
+}
+
+.checkbox {
+	position: relative;
+	padding: 2px;
+	font-size: 18px;
+	text-align: center;
+	width: 30px;
+}
+
+.employee-count {
+	position: relative;
+	padding: 2px;
+	text-align: center;
+	width: 100px;
 }
 
 .locked-tr {
